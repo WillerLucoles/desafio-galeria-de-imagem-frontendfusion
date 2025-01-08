@@ -19,12 +19,12 @@ const ImageCard = ({ image, isInFavorites = false }) => {
 
   return (
     <div
-    className="relative group rounded-lg shadow-md overflow-hidden"
+    className="relative group rounded-lg shadow-md overflow-hidden max-w-xs max-h-60"
     >
       <img
         src={image.download_url}
         alt={image.author}
-        className="w-full object-cover"
+        className="object-cover"
       />
 
       <button

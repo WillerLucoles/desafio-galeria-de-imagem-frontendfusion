@@ -9,7 +9,7 @@ const PhotoGallery = () => {
   useEffect(() => {
     const loadImages = async () => {
       setLoading(true);
-      const data = await fetchImages(1, 20);
+      const data = await fetchImages(1, 30);
       setImages(data);
       setLoading(false);
     };
@@ -17,11 +17,11 @@ const PhotoGallery = () => {
   }, []);
 
   return (
-    <section className="mb-6">
+    <section className="mb-6 mx-auto items-center">
       {loading ? (
         <p className="text-center">Carregando imagens...</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="flex flex-wrap gap-4 items-center justify-center">
           {images.map((image) => (
             <ImageCard key={image.id} image={image} />
           ))}
