@@ -7,8 +7,8 @@ import Footer from "./Components/Footer";
 function App() {
   return (
     <FavoritesProvider>
+      <Header />
       <div className="container mx-auto p-4">
-        <Header />
         <FavoritesSection />
         <PhotoGallery />
         <Footer />
