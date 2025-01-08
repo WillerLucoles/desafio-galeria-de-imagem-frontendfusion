@@ -1,4 +1,8 @@
-const ImageCard = ({ image, onFavorite }) => {
+import { useFavorites } from "../Context/FavoritesContext";
+
+const ImageCard = ({ image }) => {
+  const { addFavorite } = useFavorites();
+
   return (
     <div className="rounded shadow-lg p-4 bg-white">
       <img
@@ -9,7 +13,7 @@ const ImageCard = ({ image, onFavorite }) => {
       <div className="flex justify-between items-center mt-2">
         <span className="text-sm text-gray-600">{image.author}</span>
         <button
-          onClick={() => onFavorite(image)}
+          onClick={() => addFavorite(image)}
           className="text-blue-500 hover:underline"
         >
           Favoritar
