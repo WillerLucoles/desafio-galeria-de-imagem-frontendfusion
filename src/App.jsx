@@ -1,16 +1,20 @@
-
-import './App.css'
+import { FavoritesProvider } from "./Context/FavoritesContext";
+import Header from "./Components/Header";
+import FavoritesSection from "./Components/FavoritesSection";
+import PhotoGallery from "./Components/PhotoGallery";
+import Footer from "./Components/Footer";
 
 function App() {
-
   return (
-    <>
-      <main>
-        <h1>Seja bem vindo! :)</h1>
-        <p>Desafio de Galeria de Imagens - Processo Seletivo Frontend Fusion</p>
-      </main>
-    </>
+    <FavoritesProvider>
+      <div className="container mx-auto p-4">
+        <Header />
+        <FavoritesSection />
+        <PhotoGallery />
+        <Footer />
+      </div>
+    </FavoritesProvider>
   );
 }
 
-export default App
+export default App;
