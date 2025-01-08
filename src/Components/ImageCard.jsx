@@ -1,22 +1,52 @@
 import { useFavorites } from "../Context/FavoritesContext";
+import { FiStar, FiDownload } from "react-icons/fi";
 
-const ImageCard = ({ image }) => {
-  const { addFavorite } = useFavorites();
+const ImageCard = ({ image, isInFavorites = false }) => {
+  const { favorites, addFavorite, removeFavorite } = useFavorites();
+  const isFavorited = favorites.some((fav) => fav.id === image.id);
+
+  const handleFavoriteClick = () => {
+    if (isFavorited) {
+      removeFavorite(image.id);
+    } else {
+      addFavorite(image);
+    }
+  };
+
+  const handleOpenImage = () => {
+    window.open(image.download_url, "_blank");
+  };
 
   return (
-    <div className="rounded shadow-lg p-4 bg-white">
+    <div
+    className="relative group rounded-lg shadow-md overflow-hidden"
+    >
       <img
         src={image.download_url}
         alt={image.author}
-        className="rounded h-48 w-full object-cover"
+        className="w-full object-cover"
       />
-      <div className="flex justify-between items-center mt-2">
-        <span className="text-sm text-gray-600">{image.author}</span>
+
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          handleFavoriteClick();
+        }}
+        className={`absolute top-2 right-2 z-20 ${
+          isFavorited ? "text-yellow-500" : "text-gray-400"
+        }`}
+      >
+        <FiStar size={24} />
+      </button>
+
+      <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition duration-300 flex justify-between items-end p-3 md:opacity-0 md:group-hover:opacity-100 z-10">
+        <span className="text-white text-md font-bold">{image.author}</span>
         <button
-          onClick={() => addFavorite(image)}
-          className="text-blue-500 hover:underline"
+          onClick={handleOpenImage}
+          className="bg-green-500 text-white text-sm px-3 py-1 rounded"
         >
-          Favoritar
+          <FiDownload size={16} className="inline-block mr-1" />
+          Baixar
         </button>
       </div>
     </div>
