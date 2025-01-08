@@ -1,16 +1,25 @@
-
-import './App.css'
+import { useEffect, useState } from "react";
+import { fetchImages } from "./Api/Pcisum";
 
 function App() {
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadImages = async () => {
+      setLoading(true);
+      const data = await fetchImages(1, 5);
+      setImages(data);
+      setLoading(false);
+    };
+    loadImages();
+  }, []);
 
   return (
-    <>
-      <main>
-        <h1>Seja bem vindo! :)</h1>
-        <p>Desafio de Galeria de Imagens - Processo Seletivo Frontend Fusion</p>
-      </main>
-    </>
+    <div>
+      {loading ? <p>Carregando...</p> : <p>{images.length} imagens carregadas!</p>}
+    </div>
   );
 }
 
-export default App
+export default App;
