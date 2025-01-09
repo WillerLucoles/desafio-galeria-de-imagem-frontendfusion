@@ -12,7 +12,7 @@ const PhotoGallery = ({ searchQuery }) => {
   useEffect(() => {
     const loadImages = async () => {
       setLoading(true);
-      const data = await fetchImages(1, 20);
+      const data = await fetchImages(1, 30);
       setImages(data);
       setFilteredImages(data);
 
@@ -37,7 +37,7 @@ const PhotoGallery = ({ searchQuery }) => {
     if (searchQuery) {
       const lowerQuery = searchQuery.toLowerCase();
       updatedImages = updatedImages.filter((image) => {
-        const dimensions = `${image.width}x${image.height}`; // Formato de dimensões
+        const dimensions = `${image.width}x${image.height}`;
         return (
           image.author.toLowerCase().includes(lowerQuery) ||
           image.id.toString().includes(lowerQuery) ||
@@ -78,7 +78,7 @@ const PhotoGallery = ({ searchQuery }) => {
         <p className="text-center">Carregando imagens...</p>
       ) : (
         <div className="flex flex-wrap gap-4 items-center justify-center">
-          {images.map((image) => (
+          {filteredImages.map((image) => (
             <ImageCard key={image.id} image={image} />
           ))}
         </div>
